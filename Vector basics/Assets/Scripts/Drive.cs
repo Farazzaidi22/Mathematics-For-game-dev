@@ -16,9 +16,29 @@ public class Drive : MonoBehaviour
 
     private void Start()
     {
+        //direction = fuel.transform.position - this.transform.position;
+        //Coord dirNormal = MyMath.GetNormal(new Coord(direction));
+        //direction = dirNormal.ToVector();
+
+
+        //this.transform.up = MyMath.LookAt2D(new Coord(this.transform.forward), 
+        //                                    new Coord(this.transform.position),
+        //                                    new Coord(fuel.transform.position)).ToVector();
+
         direction = fuel.transform.position - this.transform.position;
-        Coord dir = MyMath.GetNormal(new Coord(direction));
-        direction = dir.ToVector();
+        Coord dirNormal = MyMath.GetNormal(new Coord(direction));
+        direction = dirNormal.ToVector();
+        float a = MyMath.Angle(new Coord(0, 1, 0), new Coord(direction)); // * (180.0f / Mathf.PI);
+        Debug.Log("Angle: " + a);
+
+        bool clockwise = false;
+        if (MyMath.CrossProd(new Coord(this.transform.up), dirNormal).z < 0)
+        {
+            clockwise = true;
+        }
+
+        Coord newDir = MyMath.Rotate(new Coord(0, 1, 0), a, clockwise);
+        this.transform.up = new Vector3(newDir.x, newDir.y, newDir.z);
     }
 
     void Update()

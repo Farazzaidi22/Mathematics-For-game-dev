@@ -35,7 +35,7 @@ public class Drive : MonoBehaviour
         transform.Translate(0, translation, 0);
 
         // Rotate around our y-axis
-        transform.Rotate(0, 0, -rotation);
+        //transform.Rotate(0, 0, -rotation);
 
         energyamt.text = (float.Parse(energyamt.text) - Vector3.Distance(currentPos, this.transform.position)) + "";
         currentPos = this.transform.position;

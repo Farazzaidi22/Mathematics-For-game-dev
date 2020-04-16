@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public Text tankPosition;
     public Text fuelPosition;
     public Text energyAmt;
+    public Text turnAngle;
 
 
     public void AddEnergy(string amt)
@@ -17,9 +18,25 @@ public class UIManager : MonoBehaviour
         int n;
         if(int.TryParse(amt, out n))
         {
+            print("amil4");
             energyAmt.text = amt;
         }
     }
+
+    public void TurnAngle(string amt)
+    {
+        float n;
+        print("amil");
+        if(float.TryParse(amt, out n))
+        {
+            print("amil2");
+            n = n * (Mathf.PI / 180);
+            print("amil3");
+            Tank.transform.up = MyMath.Rotate(new Coord(Tank.transform.up), n, false).ToVector();
+        }
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
